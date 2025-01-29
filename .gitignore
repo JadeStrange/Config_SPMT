@@ -1,0 +1,6 @@
+bin
+build
+scripts
+cfg/DAQ_Config_*
+connections.xml.bak1
+test

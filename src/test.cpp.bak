@@ -1,0 +1,38 @@
+#include <sys/types.h>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <unistd.h>
+#include <algorithm>
+#include <vector>
+#include <regex>
+#include "uhal/uhal.hpp"
+
+using namespace uhal;
+int main(int argc, char* argv[])
+{
+    uhal::setLogLevelTo(uhal::Error());
+    std::string addressFilePath = "gcuspmt.xml";
+    std::string uri = "chtcp-2.0://localhost:10203?target=10.3.127.59:50001";
+    uhal::HwInterface* hw;
+    hw = new HwInterface(ConnectionManager::getDevice("GCUSPMT", uri, "file://" + addressFilePath));
+    // std::string device_id = hw->id();
+    // ConnectionManager manager("file://connections.xml");
+    // std::string addressFilePath = "cfg/gcuspmt.xml";
+    // std::string uri = "chtcp-2.0://localhost:10203?target=10.3.127.59:50001";
+    
+    // hw = new HwInterface(manager.getDevice("dummy.controlhub.0"));
+    std::string device_id = hw->id();
+
+    try
+    {
+        hw->getNode("ipbus_fifo_0.ctrl").read();
+        hw->dispatch();
+        std::cout<<"IPBUS Connection OK"<<std::endl;
+    }
+    catch(std::exception &e)
+    {
+        std::cout<<e.what()<<std::endl;
+    }
+    return 0;
+}

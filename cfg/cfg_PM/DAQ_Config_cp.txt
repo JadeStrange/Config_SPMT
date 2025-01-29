@@ -1,0 +1,9 @@
+GCU_ID CATIROC_ID Thres_HG Thre FreqValue TrigMode_PM DisTrigger GCU_Avail IP GCU_Auto CAT_ENABLE
+9018 0 100 520 1 N Y Y 10.3.127.38 Y Y
+9018 1 100 520 - - - - - - -
+9018 2 100 520 - - - - - - -
+9018 3 100 520 - - - - - - -
+9018 4 100 520 - - - - - - -
+9018 5 100 520 - - - - - - -
+9018 6 100 520 - - - - - - -
+9018 7 100 520 - - - - - - -

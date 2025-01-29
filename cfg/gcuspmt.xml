@@ -1,0 +1,578 @@
+<node id="GCUSPMT">
+  <node id="SPI_Master_Controller" fwinfo="endpoint;width=3">
+		<node id="d0" address="0x0" description="Data reg 0" />
+		<node id="d1" address="0x1" description="Data reg 1" />
+		<node id="d2" address="0x2" description="Data reg 2" />
+		<node id="d3" address="0x3" description="Data reg 3" />
+		<node id="ctrl" address="0x4" description="Control reg" />
+		<node id="divider" address="0x5" description="Clock divider reg" />
+		<node id="ss" address="0x6" description="Slave select reg" />
+  </node>
+  <node id="ipbus_fifo_0" address="0x810"  description="IPBUS FIFO SLAVE" tags="slave8" fwinfo="endpoint;width=4"  >
+    <node id="data" address="0x0" mode="port" description="IPBUS FIFO DATA"  />
+    <node id="ctrl" address="0x1" >
+      <node id="lock" mask="0x00000001" />
+    </node>
+    <node id="status" address="0x2" >
+      <node id="empty" mask="0x00000001" />
+      <node id="valid" mask="0x00000002" />
+      <node id="count" mask="0xfffffffc" />
+    </node>
+    <node id="occupied" address="0x3"/>
+  </node>
+  <node id="GPIO" address="0x2000" description="GPIOs" fwinfo="endpoint;width=1" tags="slave9">
+    <node id="zero" mask="0x00000001" />
+    <node id="one" mask="0x00000002"/>
+  </node>
+
+  <node id="JTAG" address="0x30" description="jtag" fwinfo="endpoint;width=3">
+    <node id="ctrl" address="0x0" />
+    <node id="tditms" mode="port" address="0x3" />
+    <node id="tdo" mode="port" address="0x4" />
+  </node>  
+    
+  <node id="uart_0" address="0x800000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node>     
+  </node>
+  <node id="uart_1" address="0x810000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_2" address="0x820000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node>   
+  </node>
+
+  <node id="uart_3" address="0x830000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_4" address="0x840000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_5" address="0x850000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_6" address="0x860000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_7" address="0x870000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_8" address="0x880000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_9" address="0x890000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_10" address="0x8A0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_11" address="0x8B0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_12" address="0x8C0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_13" address="0x8D0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_14" address="0x8E0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  <node id="uart_15" address="0x8F0000" description="ipbus to uart bridge" fwinfo="endpoint;width=10">
+    <node id="setup" address="0x0">
+      <node id="clks" mask="0x00ffffff" description="system clock divided by baudrate" />
+      <node id="parity" mask="0x07000000" description="parity bits setting" />
+      <node id="stop" mask="0x08000000" description="number of stop bits" />
+      <node id="word" mask="0x30000000" description="number of word bits" />
+    </node>
+    <node id="fifo" address="0x1">
+      <node id="tx_fifo_lgln" mask="0xf0000000" description="tx fifo length" />
+      <node id="tx_fifo_fill" mask="0x0ffc0000" description="tx fifo fill level" />
+      <node id="tx_fifo_half" mask="0x00020000" description="tx fifo half full" />
+      <node id="tx_fifo_not_empty" mask="0x00010000" description="tx fifo not empty" />
+      <node id="rx_fifo_lgln" mask="0x0000f000" description="rx fifo length" />
+      <node id="rx_fifo_fill" mask="0x00000ffc" description="rx fifo fill level" />
+      <node id="rx_fifo_half" mask="0x00000002" description="rx fifo half full" />
+      <node id="rx_fifo_not_empty" mask="0x00000001" description="rx fifo not empty" />
+    </node>
+    <node id="rx_data" address="0x2">
+      <node id="clear" mask="0x00000600" description="errors clear bits" />
+      <node id="rx_reset" mask="0x00001000" description="receiver reset" />
+    </node>
+    <node id="tx_data" address="0x3"/>
+    <node id="trip" address="0x100">
+      <node id="enable" address="0xFD" description="enable and clear trip register" />
+      <node id="count" address="0xFE" description="LAM loss cycles threshold" /> 
+      <node id="status" address="0x7D" description="trip status" />     
+    </node> 
+  </node>
+  
+  
+  <node id="System" address="0xff00" description="sys" fwinfo="endpoint;width=8" >
+    <node id="enable" address="0xF0">
+    	<node id="cablemode" mask="0x0000001E" description="cat6output2bec" />
+    </node>
+    <node id="reset" address="0xF1">
+    	<node id="sys_rst" mask="0x00000001" description="system reset" />
+    	<node id="errcnt" mask="0x00000002" description="errcnt reset" />
+    	<node id="ddr_test" mask="0x00000004" description="ddr test reset" />
+    	<node id="ddr_init" mask="0x00000008" description="ddr init reset" />      	
+    </node>      		
+    <node id="tap" address="0xF2">
+    	<node id="tap_cnt" mask="0x0000007f" description="iodelay tap count" />
+    	<node id="ld" mask="0x00000080" description="iodelay LD" />  	
+    </node>       		     		
+    <node id="manu_ip" address="0xF3" description="manual ip assignment" /> 
+    <node id="tap_o" address="0x71" description="tap readout" />       	
+    <node id="lolcnt" address="0x72" description="lolcnt readout" />      	
+    <node id="errcnt" address="0x73" description="errcnt readout" />   
+    <node id="gcu_id" address="0xF4" description="gcuid assign" />       
+    <node id="version" address="0x75" description="version readout" />  
+    <node id="errcnt1" address="0x77" description="comm err" />         	
+    <node id="errcnt2" address="0x78" description="1bit err" />  
+    <node id="errcnt3" address="0x79" description="2bits err" />     
+    <node id="lolcnt1" address="0x7A" description="mmcm1 lock" />         	
+    <node id="lolcnt2" address="0x7B" description="pll lock" />  
+    <node id="lolcnt3" address="0x7C" description="mmcm2 lock" />   
+    <node id="ddrerr" address="0x7E" description="ddr err" />       
+    <node id="errcode" address="0x7F" description="error code" />        	
+  </node>
+  
+	<node id="sysmon" address="0x8000000" fwinfo="endpoint; width=8">
+
+	  <!-- NOTE: Since the lower nine bits of the address are passed
+	       straigh to the DRP side of the sysmon, one should not
+	       instantiate the IPBus sysmon entity below address 0x200. -->
+
+	  <!-- More details about the actual register contents can be found in
+	       Xilinx UG480. -->
+
+	  <node id="temp"
+	        description="FPGA die temperature. Conversion: (ADC_code x 503.975 / 4096.) - 273.15 [C]."
+	        address="0x00000000"
+	        mask="0x0000fff0"
+	        tags="conversion=(val * 503.975 / 4096.) - 273.15;C" />
+
+	  <node id="vccint"
+	        description="VCCINT. Conversion: (ADC_code / 4096.) * 3 [V]."
+	        address="0x00000001"
+	        mask="0x0000fff0"
+	        tags="conversion=(val / 4096.) * 3.;V" />
+
+	  <node id="vccaux"
+	        description="VCCAUX. Conversion: (ADC_code / 4096.) * 3 [V]."
+	        address="0x00000002"
+	        mask="0x0000fff0"
+	        tags="conversion=(val / 4096.) * 3.;V" />
+
+	  <!-- NOTE: At address 0x3 lives the VP/VN measurement, which is
+	       disabled on the VHDL side. -->
+
+	  <node id="vrefp"
+	        description="VREFP. Conversion: (ADC_code / 4096.) * 3 [V]."
+	        address="0x00000004"
+	        mask="0x0000fff0"
+	        tags="conversion=(val / 4096.) * 3.;V" />
+
+	  <node id="vrefn"
+	        description="VREFN. Conversion: (ADC_code / 4096.) * 3 [V]."
+	        address="0x00000005"
+	        mask="0x0000fff0"
+	        tags="conversion=(val / 4096.) * 3.;V" />
+
+	  <node id="vccbram"
+	        description="VCCBRAM. Conversion: (ADC_code / 4096.) * 3 [V]."
+	        address="0x00000006"
+	        mask="0x0000fff0"
+	        tags="conversion=(val / 4096.) * 3.;V" />
+
+	</node>
+
+  <node id="smbus" address="0x80000000" description="ipbus to SMBUS bridge" fwinfo="endpoint;width=4">
+    <node id="PRERlo" address="0x0">
+    </node>
+    <node id="PRERhi" address="0x1">
+    </node>
+    <node id="CTR" address="0x2">
+    </node>
+    <node id="TXRX" address="0x3">
+    </node>
+    <node id="CRSR" address="0x4">
+    </node>
+  </node>  
+  
+</node>
